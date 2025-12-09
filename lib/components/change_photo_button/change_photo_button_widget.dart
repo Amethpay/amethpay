@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,9 @@ class _ChangePhotoButtonWidgetState extends State<ChangePhotoButtonWidget> {
       final ImagePicker picker = ImagePicker();
       final XFile? image = await picker.pickImage(
         source: ImageSource.gallery,
-        imageQuality: 80,
+        imageQuality: 85,
+        maxHeight: 1024,
+        maxWidth: 1024,
       );
 
       if (image == null) {
@@ -51,43 +54,88 @@ class _ChangePhotoButtonWidgetState extends State<ChangePhotoButtonWidget> {
         return;
       }
 
-      // Upload para Firebase Storage
+      // Obter usuário atual
       final User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Usuário não autenticado')),
-        );
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Usuário não autenticado'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
         setState(() => _isLoading = false);
         return;
       }
 
+      // Criar nome único para a imagem
       final String fileName =
           'profile_pictures/${currentUser.uid}_${DateTime.now().millisecondsSinceEpoch}.jpg';
       final Reference ref = FirebaseStorage.instance.ref().child(fileName);
 
+      // Ler bytes da imagem
       final bytes = await image.readAsBytes();
-      await ref.putBytes(bytes);
 
+      // Upload com metadados
+      final SettableMetadata metadata = SettableMetadata(
+        contentType: 'image/jpeg',
+        customMetadata: {
+          'uploadedAt': DateTime.now().toIso8601String(),
+          'userId': currentUser.uid,
+        },
+      );
+
+      await ref.putBytes(bytes, metadata);
+
+      // Obter URL de download
       final String downloadUrl = await ref.getDownloadURL();
 
-      // Atualizar o perfil do usuário
+      // Atualizar foto do usuário no Firebase Auth
       await currentUser.updatePhotoURL(downloadUrl);
+      
+      // Recarregar dados do usuário
       await currentUser.reload();
 
-      // Chamar o callback
+      // Forçar refresh do usuário autenticado
+      await FFAppState().setCurrentUserPhoto(downloadUrl);
+
+      // Chamar callback se fornecido
       if (widget.onPhotoChanged != null) {
         await widget.onPhotoChanged!(downloadUrl);
       }
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Foto de perfil atualizada com sucesso!')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Foto de perfil atualizada com sucesso!'),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    } on FirebaseException catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro do Firebase: ${e.message}'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erro ao atualizar foto: $e')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro ao atualizar foto: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     } finally {
-      setState(() => _isLoading = false);
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
     }
   }
 
@@ -98,11 +146,12 @@ class _ChangePhotoButtonWidgetState extends State<ChangePhotoButtonWidget> {
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white,
         foregroundColor: FlutterFlowTheme.of(context).primaryColor,
-        padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),
         disabledBackgroundColor: Colors.grey[300],
+        elevation: 2.0,
       ),
       child: _isLoading
           ? SizedBox(
