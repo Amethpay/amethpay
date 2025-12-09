@@ -2,8 +2,8 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/completetransferbusiness/completetransferbusiness_widget.dart';
 import '/components/completetransferbusiness_computer/completetransferbusiness_computer_widget.dart';
-import '/components/input_transfer_funds_business/input_transfer_funds_business_widget.dart';
-import '/components/input_transfer_funds_business_computer/input_transfer_funds_business_computer_widget.dart';
+import '/components/input_tranfer_funds_business/input_tranfer_funds_business_widget.dart';
+import '/components/input_tranfer_funds_business_computer/input_tranfer_funds_business_computer_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -2622,11 +2622,11 @@ class _TransferFundsBusinessWidgetState
                                       ),
                                       wrapWithModel(
                                         model: _model
-                                            .inputTransferFundsBusinessModel,
+                                            .inputTranferFundsBusinessModel,
                                         updateCallback: () =>
                                             safeSetState(() {}),
                                         child:
-                                            InputTransferFundsBusinessWidget(),
+                                            InputTranferFundsBusinessWidget(),
                                       ),
                                     ],
                                   ),
@@ -5730,11 +5730,11 @@ class _TransferFundsBusinessWidgetState
                                       ),
                                       wrapWithModel(
                                         model: _model
-                                            .inputTransferFundsBusinessComputerModel,
+                                            .inputTranferFundsBusinessComputerModel,
                                         updateCallback: () =>
                                             safeSetState(() {}),
                                         child:
-                                            InputTransferFundsBusinessComputerWidget(),
+                                            InputTranferFundsBusinessComputerWidget(),
                                       ),
                                     ],
                                   ),

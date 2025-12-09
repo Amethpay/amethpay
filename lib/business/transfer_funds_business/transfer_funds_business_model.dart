@@ -1,5 +1,5 @@
-import '/components/input_transfer_funds_business/input_transfer_funds_business_widget.dart';
-import '/components/input_transfer_funds_business_computer/input_transfer_funds_business_computer_widget.dart';
+import '/components/input_tranfer_funds_business/input_tranfer_funds_business_widget.dart';
+import '/components/input_tranfer_funds_business_computer/input_tranfer_funds_business_computer_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/index.dart';
@@ -54,8 +54,8 @@ class TransferFundsBusinessModel
   // State field(s) for DropDown widget.
   String? dropDownValue3;
   FormFieldController<String>? dropDownValueController3;
-  // Model for InputTransferFundsBusiness component.
-  late InputTransferFundsBusinessModel inputTransferFundsBusinessModel;
+  // Model for InputTranferFundsBusiness component.
+  late InputTranferFundsBusinessModel inputTranferFundsBusinessModel;
   // State field(s) for Carousel widget.
   CarouselSliderController? carouselController2;
   int carouselCurrentIndex2 = 0;
@@ -97,20 +97,20 @@ class TransferFundsBusinessModel
   // State field(s) for DropDown widget.
   String? dropDownValue6;
   FormFieldController<String>? dropDownValueController6;
-  // Model for InputTransferFundsBusinessComputer component.
-  late InputTransferFundsBusinessComputerModel
-      inputTransferFundsBusinessComputerModel;
+  // Model for InputTranferFundsBusinessComputer component.
+  late InputTranferFundsBusinessComputerModel
+      inputTranferFundsBusinessComputerModel;
 
   @override
   void initState(BuildContext context) {
     textController1Validator = _textController1Validator;
     textController2Validator = _textController2Validator;
-    inputTransferFundsBusinessModel =
-        createModel(context, () => InputTransferFundsBusinessModel());
+    inputTranferFundsBusinessModel =
+        createModel(context, () => InputTranferFundsBusinessModel());
     textController3Validator = _textController3Validator;
     textController4Validator = _textController4Validator;
-    inputTransferFundsBusinessComputerModel =
-        createModel(context, () => InputTransferFundsBusinessComputerModel());
+    inputTranferFundsBusinessComputerModel =
+        createModel(context, () => InputTranferFundsBusinessComputerModel());
   }
 
   @override
@@ -121,13 +121,13 @@ class TransferFundsBusinessModel
     textFieldFocusNode2?.dispose();
     textController2?.dispose();
 
-    inputTransferFundsBusinessModel.dispose();
+    inputTranferFundsBusinessModel.dispose();
     textFieldFocusNode3?.dispose();
     textController3?.dispose();
 
     textFieldFocusNode4?.dispose();
     textController4?.dispose();
 
-    inputTransferFundsBusinessComputerModel.dispose();
+    inputTranferFundsBusinessComputerModel.dispose();
   }
 }

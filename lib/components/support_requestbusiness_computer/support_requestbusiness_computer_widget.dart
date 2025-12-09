@@ -124,7 +124,7 @@ class _SupportRequestbusinessComputerWidgetState
                         EdgeInsetsDirectional.fromSTEB(205.0, 0.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        context.pushNamed(SupportbusinessWidget.routeName);
+                        context.pushNamed(SuportbusinessWidget.routeName);
                       },
                       text: FFLocalizations.of(context).getText(
                         '7xc09z0p' /* ok */,

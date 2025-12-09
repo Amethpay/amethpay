@@ -741,7 +741,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
                                               context.pushNamed(
-                                                  SupportWidget.routeName);
+                                                  SuportWidget.routeName);
                                             },
                                             child: Container(
                                               width: double.infinity,
@@ -2588,7 +2588,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
                                               context.pushNamed(
-                                                  SupportWidget.routeName);
+                                                  SuportWidget.routeName);
                                             },
                                             child: Container(
                                               width: double.infinity,

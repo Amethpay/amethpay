@@ -2,8 +2,8 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/completetransfer/completetransfer_widget.dart';
 import '/components/completetransfer_computer/completetransfer_computer_widget.dart';
-import '/components/transfer_funds/transfer_funds_widget.dart';
-import '/components/transfer_funds_computer/transfer_funds_computer_widget.dart';
+import '/components/tranfer_funds/tranfer_funds_widget.dart';
+import '/components/tranfer_funds_computer/tranfer_funds_computer_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -2598,7 +2598,7 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
                                         model: _model.tranferFundsModel,
                                         updateCallback: () =>
                                             safeSetState(() {}),
-                                        child: TransferFundsWidget(),
+                                        child: TranferFundsWidget(),
                                       ),
                                     ],
                                   ),
@@ -5673,7 +5673,7 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
                                         model: _model.tranferFundsComputerModel,
                                         updateCallback: () =>
                                             safeSetState(() {}),
-                                        child: TransferFundsComputerWidget(),
+                                        child: TranferFundsComputerWidget(),
                                       ),
                                     ],
                                   ),

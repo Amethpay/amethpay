@@ -2,8 +2,8 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/complete_crypto_transfer/complete_crypto_transfer_widget.dart';
 import '/components/complete_crypto_transfer_computer/complete_crypto_transfer_computer_widget.dart';
-import '/components/transfer_crypto/transfer_crypto_widget.dart';
-import '/components/transfer_crypto_computer/transfer_crypto_computer_widget.dart';
+import '/components/tranfer_crypto/tranfer_crypto_widget.dart';
+import '/components/tranfer_crypto_computer/tranfer_crypto_computer_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -1809,7 +1809,7 @@ class _TransfercryptoWidgetState extends State<TransfercryptoWidget>
                                         model: _model.tranferCryptoModel,
                                         updateCallback: () =>
                                             safeSetState(() {}),
-                                        child: TransferCryptoWidget(),
+                                        child: TranferCryptoWidget(),
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -4267,7 +4267,7 @@ class _TransfercryptoWidgetState extends State<TransfercryptoWidget>
                                             _model.tranferCryptoComputerModel,
                                         updateCallback: () =>
                                             safeSetState(() {}),
-                                        child: TransferCryptoComputerWidget(),
+                                        child: TranferCryptoComputerWidget(),
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(

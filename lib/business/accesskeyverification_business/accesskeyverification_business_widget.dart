@@ -302,7 +302,7 @@ class _AccesskeyverificationBusinessWidgetState
                             );
 
                             context.pushNamed(
-                              CompleteProfilebusinessWidget.routeName,
+                              CompleteProfiebusinessWidget.routeName,
                               queryParameters: {
                                 'email': serializeParam(
                                   _model.enterTheCodeTextController1.text,
@@ -621,7 +621,7 @@ class _AccesskeyverificationBusinessWidgetState
                             );
 
                             context.pushNamed(
-                              CompleteProfilebusinessWidget.routeName,
+                              CompleteProfiebusinessWidget.routeName,
                               queryParameters: {
                                 'email': serializeParam(
                                   '',

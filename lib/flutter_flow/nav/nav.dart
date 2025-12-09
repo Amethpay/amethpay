@@ -201,9 +201,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => UserdataWidget(),
         ),
         FFRoute(
-          name: SupportWidget.routeName,
-          path: SupportWidget.routePath,
-          builder: (context, params) => SupportWidget(),
+          name: SuportWidget.routeName,
+          path: SuportWidget.routePath,
+          builder: (context, params) => SuportWidget(),
         ),
         FFRoute(
           name: PrivacyPolicyWidget.routeName,
@@ -267,9 +267,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => RegisterAccountbusinessWidget(),
         ),
         FFRoute(
-          name: CompleteProfilebusinessWidget.routeName,
-          path: CompleteProfilebusinessWidget.routePath,
-          builder: (context, params) => CompleteProfilebusinessWidget(
+          name: CompleteProfiebusinessWidget.routeName,
+          path: CompleteProfiebusinessWidget.routePath,
+          builder: (context, params) => CompleteProfiebusinessWidget(
             email: params.getParam(
               'email',
               ParamType.String,
@@ -376,9 +376,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => NotificationsbusinessWidget(),
         ),
         FFRoute(
-          name: SupportbusinessWidget.routeName,
-          path: SupportbusinessWidget.routePath,
-          builder: (context, params) => SupportbusinessWidget(),
+          name: SuportbusinessWidget.routeName,
+          path: SuportbusinessWidget.routePath,
+          builder: (context, params) => SuportbusinessWidget(),
         ),
         FFRoute(
           name: PrivacyPolicybusinessWidget.routeName,
@@ -401,9 +401,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => TermsandconditionsWidget(),
         ),
         FFRoute(
-          name: TermsbusinessWidget.routeName,
-          path: TermsbusinessWidget.routePath,
-          builder: (context, params) => TermsbusinessWidget(),
+          name: TermbusinessWidget.routeName,
+          path: TermbusinessWidget.routePath,
+          builder: (context, params) => TermbusinessWidget(),
         ),
         FFRoute(
           name: TermWidget.routeName,

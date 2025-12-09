@@ -117,7 +117,7 @@ class _SupportRequestWidgetState extends State<SupportRequestWidget> {
                 children: [
                   FFButtonWidget(
                     onPressed: () async {
-                      context.pushNamed(SupportWidget.routeName);
+                      context.pushNamed(SuportWidget.routeName);
                     },
                     text: FFLocalizations.of(context).getText(
                       'zhae3b31' /* ok */,

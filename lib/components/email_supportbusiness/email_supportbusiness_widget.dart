@@ -119,7 +119,7 @@ class _EmailSupportbusinessWidgetState
                 children: [
                   FFButtonWidget(
                     onPressed: () async {
-                      context.pushNamed(SupportbusinessWidget.routeName);
+                      context.pushNamed(SuportbusinessWidget.routeName);
                     },
                     text: FFLocalizations.of(context).getText(
                       '3wbxnykx' /* ok */,
