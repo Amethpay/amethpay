@@ -1,0 +1,18 @@
+import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
+import 'privacy_policybusiness_widget.dart' show PrivacyPolicybusinessWidget;
+import 'package:flutter/material.dart';
+
+class PrivacyPolicybusinessModel
+    extends FlutterFlowModel<PrivacyPolicybusinessWidget> {
+  ///  State fields for stateful widgets in this page.
+
+  final formKey1 = GlobalKey<FormState>();
+  final formKey2 = GlobalKey<FormState>();
+
+  @override
+  void initState(BuildContext context) {}
+
+  @override
+  void dispose() {}
+}

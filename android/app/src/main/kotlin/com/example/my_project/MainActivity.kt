@@ -1,0 +1,6 @@
+package com.flutterflow.amethpay
+
+import io.flutter.embedding.android.FlutterFragmentActivity
+
+class MainActivity: FlutterFragmentActivity() {
+}
