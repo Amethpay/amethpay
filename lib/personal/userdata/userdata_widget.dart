@@ -7,7 +7,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/index.dart';
+import '/backend/firebase/firebase_photo_upload.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -434,96 +436,124 @@ class _UserdataWidgetState extends State<UserdataWidget> {
                                                         0.0, 16.0, 0.0, 0.0),
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
-                                                    final selectedMedia =
-                                                        await selectMediaWithSourceBottomSheet(
-                                                      context: context,
-                                                      maxWidth: 500.00,
-                                                      maxHeight: 500.00,
-                                                      allowPhoto: true,
-                                                    );
-                                                    if (selectedMedia != null &&
-                                                        selectedMedia.every((m) =>
-                                                            validateFileFormat(
-                                                                m.storagePath,
-                                                                context))) {
+                                                    try {
                                                       safeSetState(() => _model
                                                               .isDataUploading_uploadDataI7y =
                                                           true);
-                                                      var selectedUploadedFiles =
-                                                          <FFUploadedFile>[];
 
-                                                      var downloadUrls =
-                                                          <String>[];
-                                                      try {
-                                                        selectedUploadedFiles =
-                                                            selectedMedia
-                                                                .map((m) =>
-                                                                    FFUploadedFile(
-                                                                      name: m
-                                                                          .storagePath
-                                                                          .split(
-                                                                              '/')
-                                                                          .last,
-                                                                      bytes: m
-                                                                          .bytes,
-                                                                      height: m
-                                                                          .dimensions
-                                                                          ?.height,
-                                                                      width: m
-                                                                          .dimensions
-                                                                          ?.width,
-                                                                      blurHash:
-                                                                          m.blurHash,
-                                                                      originalFilename:
-                                                                          m.originalFilename,
-                                                                    ))
-                                                                .toList();
+                                                      final selectedMedia =
+                                                          await selectMediaWithSourceBottomSheet(
+                                                        context: context,
+                                                        maxWidth: 1024.00,
+                                                        maxHeight: 1024.00,
+                                                        allowPhoto: true,
+                                                      );
 
-                                                        downloadUrls =
-                                                            (await Future.wait(
-                                                          selectedMedia.map(
-                                                            (m) async =>
-                                                                await uploadData(
-                                                                    m.storagePath,
-                                                                    m.bytes),
-                                                          ),
-                                                        ))
-                                                                .where((u) =>
-                                                                    u != null)
-                                                                .map((u) => u!)
-                                                                .toList();
-                                                      } finally {
-                                                        _model.isDataUploading_uploadDataI7y =
-                                                            false;
-                                                      }
-                                                      if (selectedUploadedFiles
-                                                                  .length ==
-                                                              selectedMedia
-                                                                  .length &&
-                                                          downloadUrls.length ==
-                                                              selectedMedia
-                                                                  .length) {
-                                                        safeSetState(() {
-                                                          _model.uploadedLocalFile_uploadDataI7y =
-                                                              selectedUploadedFiles
-                                                                  .first;
-                                                          _model.uploadedFileUrl_uploadDataI7y =
-                                                              downloadUrls
-                                                                  .first;
-                                                        });
-                                                      } else {
-                                                        safeSetState(() {});
+                                                      if (selectedMedia == null ||
+                                                          selectedMedia.isEmpty) {
+                                                        safeSetState(() => _model
+                                                                .isDataUploading_uploadDataI7y =
+                                                            false);
                                                         return;
                                                       }
-                                                    }
 
-                                                    await currentUserReference!
-                                                        .update(
-                                                            createUsersRecordData(
-                                                      photoUrl: _model
-                                                          .uploadedFileUrl_uploadDataI7y,
-                                                    ));
-                                                    safeSetState(() {});
+                                                      // Converter primeiro arquivo para File
+                                                      final File imageFile =
+                                                          File(selectedMedia.first
+                                                              .storagePath);
+
+                                                      // Obter ID do usuário
+                                                      final userId =
+                                                          currentUserReference
+                                                              ?.id;
+                                                      if (userId == null) {
+                                                        if (mounted) {
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(
+                                                            const SnackBar(
+                                                              content: Text(
+                                                                  'Erro: Usuário não autenticado'),
+                                                              backgroundColor:
+                                                                  Colors.red,
+                                                            ),
+                                                          );
+                                                        }
+                                                        safeSetState(() => _model
+                                                                .isDataUploading_uploadDataI7y =
+                                                            false);
+                                                        return;
+                                                      }
+
+                                                      // Fazer upload com função customizada
+                                                      final String?
+                                                          downloadUrl =
+                                                          await uploadProfilePhoto(
+                                                        imageFile: imageFile,
+                                                        userId: userId,
+                                                        onProgress: (progress) {
+                                                          // Progresso pode ser usado para UI
+                                                        },
+                                                      );
+
+                                                      if (downloadUrl == null ||
+                                                          downloadUrl
+                                                              .isEmpty) {
+                                                        if (mounted) {
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(
+                                                            const SnackBar(
+                                                              content: Text(
+                                                                  'Erro ao fazer upload'),
+                                                              backgroundColor:
+                                                                  Colors.red,
+                                                            ),
+                                                          );
+                                                        }
+                                                        safeSetState(() => _model
+                                                                .isDataUploading_uploadDataI7y =
+                                                            false);
+                                                        return;
+                                                      }
+
+                                                      // Salvar URL no modelo
+                                                      safeSetState(() {
+                                                        _model
+                                                            .uploadedFileUrl_uploadDataI7y =
+                                                            downloadUrl;
+                                                      });
+
+                                                      if (mounted) {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          const SnackBar(
+                                                            content: Text(
+                                                                '✅ Foto atualizada com sucesso!'),
+                                                            backgroundColor:
+                                                                Colors.green,
+                                                          ),
+                                                        );
+                                                      }
+                                                    } catch (e) {
+                                                      if (mounted) {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          SnackBar(
+                                                            content: Text(
+                                                                'Erro: $e'),
+                                                            backgroundColor:
+                                                                Colors.red,
+                                                          ),
+                                                        );
+                                                      }
+                                                    } finally {
+                                                      safeSetState(() => _model
+                                                              .isDataUploading_uploadDataI7y =
+                                                          false);
+                                                    }
                                                   },
                                                   text: FFLocalizations.of(
                                                           context)
