@@ -58,22 +58,63 @@ Future<String?> uploadProfilePhoto({
     // 1. Atualizar Firebase Auth
     final User? currentUser = FirebaseAuth.instance.currentUser;
     if (currentUser != null) {
-      await currentUser.updatePhotoURL(downloadUrl);
-      await currentUser.reload();
+      try {
+        await currentUser.updatePhotoURL(downloadUrl);
+        await currentUser.reload();
+        print('✅ Firebase Auth atualizado: $downloadUrl');
+      } catch (e) {
+        print('⚠️ Erro ao atualizar Firebase Auth: $e');
+      }
     }
 
-    // 2. Atualizar Firestore
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .update({
-      'photoUrl': downloadUrl,
-      'photo_url': downloadUrl, // Ambos os nomes para compatibilidade
-      'photoUpdatedAt': FieldValue.serverTimestamp(),
-    });
+    // 2. Atualizar Firestore com múltiplas tentativas
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .update({
+        'photoUrl': downloadUrl,
+        'photo_url': downloadUrl, // Ambos os nomes para compatibilidade
+        'photoURL': downloadUrl, // Terceira variação
+        'photoUpdatedAt': FieldValue.serverTimestamp(),
+      });
+      print('✅ Firestore atualizado: $downloadUrl');
+    } catch (e) {
+      print('⚠️ Erro ao atualizar Firestore: $e');
+      // Tentar set em vez de update se documento não existe
+      try {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userId)
+            .set({
+          'photoUrl': downloadUrl,
+          'photo_url': downloadUrl,
+          'photoURL': downloadUrl,
+          'photoUpdatedAt': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+        print('✅ Firestore atualizado com set: $downloadUrl');
+      } catch (e2) {
+        print('❌ Erro ao atualizar Firestore com set: $e2');
+      }
+    }
 
     // 3. Atualizar FFAppState
-    await FFAppState().setCurrentUserPhoto(downloadUrl);
+    try {
+      await FFAppState().setCurrentUserPhoto(downloadUrl);
+      print('✅ FFAppState atualizado: $downloadUrl');
+    } catch (e) {
+      print('⚠️ Erro ao atualizar FFAppState: $e');
+    }
+
+    // 4. Forçar refresh do usuário atual
+    try {
+      if (currentUser != null) {
+        await currentUser.reload();
+        print('✅ Usuário recarregado');
+      }
+    } catch (e) {
+      print('⚠️ Erro ao recarregar usuário: $e');
+    }
 
     return downloadUrl;
   } on FirebaseException catch (e) {
