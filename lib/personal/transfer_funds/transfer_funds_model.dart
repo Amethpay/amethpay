@@ -1,5 +1,5 @@
-import '/components/tranfer_funds/tranfer_funds_widget.dart';
-import '/components/tranfer_funds_computer/tranfer_funds_computer_widget.dart';
+import '/components/transfer_funds/transfer_funds_widget.dart';
+import '/components/transfer_funds_computer/transfer_funds_computer_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/index.dart';
@@ -53,8 +53,8 @@ class TransferFundsModel extends FlutterFlowModel<TransferFundsWidget> {
   // State field(s) for DropDown widget.
   String? dropDownValue3;
   FormFieldController<String>? dropDownValueController3;
-  // Model for TranferFunds component.
-  late TranferFundsModel tranferFundsModel;
+  // Model for TransferFunds component.
+  late TransferFundsModel tranferFundsModel;
   // State field(s) for Carousel widget.
   CarouselSliderController? carouselController2;
   int carouselCurrentIndex2 = 0;
@@ -96,18 +96,18 @@ class TransferFundsModel extends FlutterFlowModel<TransferFundsWidget> {
   // State field(s) for DropDown widget.
   String? dropDownValue6;
   FormFieldController<String>? dropDownValueController6;
-  // Model for TranferFundsComputer component.
-  late TranferFundsComputerModel tranferFundsComputerModel;
+  // Model for TransferFundsComputer component.
+  late TransferFundsComputerModel tranferFundsComputerModel;
 
   @override
   void initState(BuildContext context) {
     textController1Validator = _textController1Validator;
     textController2Validator = _textController2Validator;
-    tranferFundsModel = createModel(context, () => TranferFundsModel());
+    tranferFundsModel = createModel(context, () => TransferFundsModel());
     textController3Validator = _textController3Validator;
     textController4Validator = _textController4Validator;
     tranferFundsComputerModel =
-        createModel(context, () => TranferFundsComputerModel());
+        createModel(context, () => TransferFundsComputerModel());
   }
 
   @override

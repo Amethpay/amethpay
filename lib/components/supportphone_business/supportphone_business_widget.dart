@@ -119,7 +119,7 @@ class _SupportphoneBusinessWidgetState
                 children: [
                   FFButtonWidget(
                     onPressed: () async {
-                      context.pushNamed(SuportbusinessWidget.routeName);
+                      context.pushNamed(SupportbusinessWidget.routeName);
                     },
                     text: FFLocalizations.of(context).getText(
                       'hf2fsel3' /* ok */,

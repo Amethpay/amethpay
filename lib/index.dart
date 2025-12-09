@@ -30,7 +30,7 @@ export '/personal/card/card_widget.dart' show CardWidget;
 export '/personal/exchange/exchange_widget.dart' show ExchangeWidget;
 export '/personal/profile/profile_widget.dart' show ProfileWidget;
 export '/personal/userdata/userdata_widget.dart' show UserdataWidget;
-export '/personal/suport/suport_widget.dart' show SuportWidget;
+export '/personal/support/support_widget.dart' show SupportWidget;
 export '/personal/privacy_policy/privacy_policy_widget.dart'
     show PrivacyPolicyWidget;
 export '/personal/exchangefailure/exchangefailure_widget.dart'
@@ -44,8 +44,8 @@ export '/business/login_pagebusiness/login_pagebusiness_widget.dart'
     show LoginPagebusinessWidget;
 export '/business/register_accountbusiness/register_accountbusiness_widget.dart'
     show RegisterAccountbusinessWidget;
-export '/business/complete_profiebusiness/complete_profiebusiness_widget.dart'
-    show CompleteProfiebusinessWidget;
+export '/business/complete_profilebusiness/complete_profilebusiness_widget.dart'
+    show CompleteProfilebusinessWidget;
 export '/business/change_passwordexit_business/change_passwordexit_business_widget.dart'
     show ChangePasswordexitBusinessWidget;
 export '/business/waitingpagebusiness/waitingpagebusiness_widget.dart'
@@ -82,8 +82,8 @@ export '/business/change_password_businessenter/change_password_businessenter_wi
     show ChangePasswordBusinessenterWidget;
 export '/business/notificationsbusiness/notificationsbusiness_widget.dart'
     show NotificationsbusinessWidget;
-export '/business/suportbusiness/suportbusiness_widget.dart'
-    show SuportbusinessWidget;
+export '/business/supportbusiness/supportbusiness_widget.dart'
+    show SupportbusinessWidget;
 export '/business/privacy_policybusiness/privacy_policybusiness_widget.dart'
     show PrivacyPolicybusinessWidget;
 export '/personal/transactionfailurecrypto/transactionfailurecrypto_widget.dart'
@@ -92,8 +92,8 @@ export '/business/termsandconditionsbusiness/termsandconditionsbusiness_widget.d
     show TermsandconditionsbusinessWidget;
 export '/personal/termsandconditions/termsandconditions_widget.dart'
     show TermsandconditionsWidget;
-export '/business/termbusiness/termbusiness_widget.dart'
-    show TermbusinessWidget;
+export '/business/termsbusiness/termsbusiness_widget.dart'
+    show TermsbusinessWidget;
 export '/personal/term/term_widget.dart' show TermWidget;
 export '/components/homescreenbusiness/homescreenbusiness_widget.dart'
     show HomescreenbusinessWidget;

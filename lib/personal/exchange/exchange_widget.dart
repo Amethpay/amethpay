@@ -1,8 +1,8 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/components/currencyexchange/currencyexchange_widget.dart';
 import '/components/currencyexchangeomputer/currencyexchangeomputer_widget.dart';
-import '/components/imput_currence/imput_currence_widget.dart';
-import '/components/imput_currence_computer/imput_currence_computer_widget.dart';
+import '/components/input_currence/input_currence_widget.dart';
+import '/components/input_currence_computer/input_currence_computer_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -896,7 +896,7 @@ class _ExchangeWidgetState extends State<ExchangeWidget>
                                         model: _model.imputCurrenceModel,
                                         updateCallback: () =>
                                             safeSetState(() {}),
-                                        child: ImputCurrenceWidget(),
+                                        child: InputCurrenceWidget(),
                                       ),
                                     ],
                                   ),
@@ -2367,7 +2367,7 @@ class _ExchangeWidgetState extends State<ExchangeWidget>
                                             _model.imputCurrenceComputerModel,
                                         updateCallback: () =>
                                             safeSetState(() {}),
-                                        child: ImputCurrenceComputerWidget(),
+                                        child: InputCurrenceComputerWidget(),
                                       ),
                                     ],
                                   ),

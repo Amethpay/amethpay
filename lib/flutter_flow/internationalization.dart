@@ -32093,7 +32093,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': '',
     },
   },
-  // ImputCurrence
+  // InputCurrence
   {
     'qi8rozry': {
       'en': 'Amount',
@@ -32102,7 +32102,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': '',
     },
   },
-  // ImputCurrenceComputer
+  // InputCurrenceComputer
   {
     '0hqfldew': {
       'en': 'Amount',
@@ -32111,7 +32111,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': '',
     },
   },
-  // TranferCrypto
+  // TransferCrypto
   {
     '7jrtumjv': {
       'en': 'Amount',
@@ -32120,7 +32120,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': '',
     },
   },
-  // TranferCryptoComputer
+  // TransferCryptoComputer
   {
     'tk4ci1i1': {
       'en': 'Amount',
@@ -32129,7 +32129,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': '',
     },
   },
-  // TranferFundsComputer
+  // TransferFundsComputer
   {
     'k8tw1i0y': {
       'en': 'Amount',
@@ -32138,7 +32138,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': '',
     },
   },
-  // TranferFunds
+  // TransferFunds
   {
     'iwof3mhi': {
       'en': 'Amount',
@@ -32174,7 +32174,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': '',
     },
   },
-  // InputTranferCryptoBusinessComputer
+  // InputTransferCryptoBusinessComputer
   {
     'hkk9965k': {
       'en': 'Amount',
@@ -32183,7 +32183,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': '',
     },
   },
-  // InputTranferFundsBusiness
+  // InputTransferFundsBusiness
   {
     'qgnqw0nv': {
       'en': 'Amount',
@@ -32192,7 +32192,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': '',
     },
   },
-  // InputTranferFundsBusinessComputer
+  // InputTransferFundsBusinessComputer
   {
     'hgw6fe17': {
       'en': 'Amount',

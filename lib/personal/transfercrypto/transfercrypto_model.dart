@@ -1,5 +1,5 @@
-import '/components/tranfer_crypto/tranfer_crypto_widget.dart';
-import '/components/tranfer_crypto_computer/tranfer_crypto_computer_widget.dart';
+import '/components/transfer_crypto/transfer_crypto_widget.dart';
+import '/components/transfer_crypto_computer/transfer_crypto_computer_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/index.dart';
@@ -47,8 +47,8 @@ class TransfercryptoModel extends FlutterFlowModel<TransfercryptoWidget> {
     return null;
   }
 
-  // Model for TranferCrypto component.
-  late TranferCryptoModel tranferCryptoModel;
+  // Model for TransferCrypto component.
+  late TransferCryptoModel tranferCryptoModel;
   // State field(s) for Carousel widget.
   CarouselSliderController? carouselController2;
   int carouselCurrentIndex2 = 0;
@@ -84,18 +84,18 @@ class TransfercryptoModel extends FlutterFlowModel<TransfercryptoWidget> {
     return null;
   }
 
-  // Model for TranferCryptoComputer component.
-  late TranferCryptoComputerModel tranferCryptoComputerModel;
+  // Model for TransferCryptoComputer component.
+  late TransferCryptoComputerModel tranferCryptoComputerModel;
 
   @override
   void initState(BuildContext context) {
     textController1Validator = _textController1Validator;
     textController2Validator = _textController2Validator;
-    tranferCryptoModel = createModel(context, () => TranferCryptoModel());
+    tranferCryptoModel = createModel(context, () => TransferCryptoModel());
     textController3Validator = _textController3Validator;
     textController4Validator = _textController4Validator;
     tranferCryptoComputerModel =
-        createModel(context, () => TranferCryptoComputerModel());
+        createModel(context, () => TransferCryptoComputerModel());
   }
 
   @override

@@ -2,7 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/complete_crypto_transferbusiness/complete_crypto_transferbusiness_widget.dart';
 import '/components/complete_crypto_transferbusiness_computer/complete_crypto_transferbusiness_computer_widget.dart';
-import '/components/input_tranfer_crypto_business_computer/input_tranfer_crypto_business_computer_widget.dart';
+import '/components/input_transfer_crypto_business_computer/input_transfer_crypto_business_computer_widget.dart';
 import '/components/inputtranfercryptobusiness/inputtranfercryptobusiness_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -1774,11 +1774,11 @@ class _TransfercryptobusinessWidgetState
                                       ),
                                       wrapWithModel(
                                         model: _model
-                                            .inputTranferCryptoBusinessComputerModel,
+                                            .inputTransferCryptoBusinessComputerModel,
                                         updateCallback: () =>
                                             safeSetState(() {}),
                                         child:
-                                            InputTranferCryptoBusinessComputerWidget(),
+                                            InputTransferCryptoBusinessComputerWidget(),
                                       ),
                                     ],
                                   ),

@@ -805,7 +805,7 @@ class _ProfilebusinessWidgetState extends State<ProfilebusinessWidget> {
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       context.pushNamed(
-                                                          SuportbusinessWidget
+                                                          SupportbusinessWidget
                                                               .routeName);
                                                     },
                                                     child: Container(
@@ -1044,7 +1044,7 @@ class _ProfilebusinessWidgetState extends State<ProfilebusinessWidget> {
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       context.pushNamed(
-                                                          TermbusinessWidget
+                                                          TermsbusinessWidget
                                                               .routeName);
                                                     },
                                                     child: Container(
@@ -2891,7 +2891,7 @@ class _ProfilebusinessWidgetState extends State<ProfilebusinessWidget> {
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       context.pushNamed(
-                                                          SuportbusinessWidget
+                                                          SupportbusinessWidget
                                                               .routeName);
                                                     },
                                                     child: Container(
@@ -3134,7 +3134,7 @@ class _ProfilebusinessWidgetState extends State<ProfilebusinessWidget> {
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       context.pushNamed(
-                                                          TermbusinessWidget
+                                                          TermsbusinessWidget
                                                               .routeName);
                                                     },
                                                     child: Container(

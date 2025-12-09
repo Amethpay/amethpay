@@ -1,4 +1,4 @@
-import '/components/input_tranfer_crypto_business_computer/input_tranfer_crypto_business_computer_widget.dart';
+import '/components/input_transfer_crypto_business_computer/input_transfer_crypto_business_computer_widget.dart';
 import '/components/inputtranfercryptobusiness/inputtranfercryptobusiness_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
@@ -48,9 +48,9 @@ class TransfercryptobusinessModel
     return null;
   }
 
-  // Model for InputTranferCryptoBusinessComputer component.
-  late InputTranferCryptoBusinessComputerModel
-      inputTranferCryptoBusinessComputerModel;
+  // Model for InputTransferCryptoBusinessComputer component.
+  late InputTransferCryptoBusinessComputerModel
+      inputTransferCryptoBusinessComputerModel;
   // State field(s) for Carousel widget.
   CarouselSliderController? carouselController2;
   int carouselCurrentIndex2 = 0;
@@ -93,8 +93,8 @@ class TransfercryptobusinessModel
   void initState(BuildContext context) {
     textController1Validator = _textController1Validator;
     textController2Validator = _textController2Validator;
-    inputTranferCryptoBusinessComputerModel =
-        createModel(context, () => InputTranferCryptoBusinessComputerModel());
+    inputTransferCryptoBusinessComputerModel =
+        createModel(context, () => InputTransferCryptoBusinessComputerModel());
     textController3Validator = _textController3Validator;
     textController4Validator = _textController4Validator;
     inputtranfercryptobusinessModel =
@@ -109,7 +109,7 @@ class TransfercryptobusinessModel
     textFieldFocusNode2?.dispose();
     textController2?.dispose();
 
-    inputTranferCryptoBusinessComputerModel.dispose();
+    inputTransferCryptoBusinessComputerModel.dispose();
     textFieldFocusNode3?.dispose();
     textController3?.dispose();
 
