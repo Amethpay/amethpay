@@ -1,10 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/firebase/firebase_photo_upload.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:io';
 import 'change_photo_button_model.dart';
 export 'change_photo_button_model.dart';
 
@@ -24,6 +25,7 @@ class ChangePhotoButtonWidget extends StatefulWidget {
 class _ChangePhotoButtonWidgetState extends State<ChangePhotoButtonWidget> {
   late ChangePhotoButtonModel _model;
   bool _isLoading = false;
+  double _uploadProgress = 0.0;
 
   @override
   void initState() {
@@ -41,27 +43,32 @@ class _ChangePhotoButtonWidgetState extends State<ChangePhotoButtonWidget> {
     try {
       setState(() => _isLoading = true);
 
+      // Usar image_picker para selecionar imagem
       final ImagePicker picker = ImagePicker();
-      final XFile? image = await picker.pickImage(
+      final XFile? pickedFile = await picker.pickImage(
         source: ImageSource.gallery,
         imageQuality: 85,
         maxHeight: 1024,
         maxWidth: 1024,
       );
 
-      if (image == null) {
+      if (pickedFile == null) {
         setState(() => _isLoading = false);
         return;
       }
 
+      // Converter para File
+      final File imageFile = File(pickedFile.path);
+
       // Obter usuário atual
-      final User? currentUser = FirebaseAuth.instance.currentUser;
+      final currentUser = currentUserReference;
       if (currentUser == null) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Usuário não autenticado'),
               backgroundColor: Colors.red,
+              duration: Duration(seconds: 3),
             ),
           );
         }
@@ -69,38 +76,22 @@ class _ChangePhotoButtonWidgetState extends State<ChangePhotoButtonWidget> {
         return;
       }
 
-      // Criar nome único para a imagem
-      final String fileName =
-          'profile_pictures/${currentUser.uid}_${DateTime.now().millisecondsSinceEpoch}.jpg';
-      final Reference ref = FirebaseStorage.instance.ref().child(fileName);
-
-      // Ler bytes da imagem
-      final bytes = await image.readAsBytes();
-
-      // Upload com metadados
-      final SettableMetadata metadata = SettableMetadata(
-        contentType: 'image/jpeg',
-        customMetadata: {
-          'uploadedAt': DateTime.now().toIso8601String(),
-          'userId': currentUser.uid,
+      // Fazer upload com função customizada
+      final String? downloadUrl = await uploadProfilePhoto(
+        imageFile: imageFile,
+        userId: currentUser.id,
+        onProgress: (progress) {
+          if (mounted) {
+            setState(() => _uploadProgress = progress);
+          }
         },
       );
 
-      await ref.putBytes(bytes, metadata);
+      if (downloadUrl == null || downloadUrl.isEmpty) {
+        throw Exception('Falha ao obter URL de download');
+      }
 
-      // Obter URL de download
-      final String downloadUrl = await ref.getDownloadURL();
-
-      // Atualizar foto do usuário no Firebase Auth
-      await currentUser.updatePhotoURL(downloadUrl);
-      
-      // Recarregar dados do usuário
-      await currentUser.reload();
-
-      // Forçar refresh do usuário autenticado
-      await FFAppState().setCurrentUserPhoto(downloadUrl);
-
-      // Chamar callback se fornecido
+      // Chamar callback
       if (widget.onPhotoChanged != null) {
         await widget.onPhotoChanged!(downloadUrl);
       }
@@ -108,33 +99,32 @@ class _ChangePhotoButtonWidgetState extends State<ChangePhotoButtonWidget> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Foto de perfil atualizada com sucesso!'),
+            content: Text('✅ Foto de perfil atualizada com sucesso!'),
             backgroundColor: Colors.green,
-            duration: Duration(seconds: 2),
+            duration: Duration(seconds: 3),
           ),
         );
-      }
-    } on FirebaseException catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Erro do Firebase: ${e.message}'),
-            backgroundColor: Colors.red,
-          ),
-        );
+
+        // Forçar rebuild para atualizar a imagem
+        safeSetState(() {});
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Erro ao atualizar foto: $e'),
+            content: Text('❌ Erro: $e'),
             backgroundColor: Colors.red,
+            duration: const Duration(seconds: 4),
           ),
         );
       }
+      print('Erro ao fazer upload de foto: $e');
     } finally {
       if (mounted) {
-        setState(() => _isLoading = false);
+        setState(() {
+          _isLoading = false;
+          _uploadProgress = 0.0;
+        });
       }
     }
   }
@@ -157,11 +147,25 @@ class _ChangePhotoButtonWidgetState extends State<ChangePhotoButtonWidget> {
           ? SizedBox(
               height: 20.0,
               width: 20.0,
-              child: CircularProgressIndicator(
-                strokeWidth: 2.0,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  FlutterFlowTheme.of(context).primaryColor,
-                ),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  CircularProgressIndicator(
+                    strokeWidth: 2.0,
+                    value: _uploadProgress,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      FlutterFlowTheme.of(context).primaryColor,
+                    ),
+                  ),
+                  Text(
+                    '${(_uploadProgress * 100).toStringAsFixed(0)}%',
+                    style: TextStyle(
+                      fontSize: 8.0,
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             )
           : Text(

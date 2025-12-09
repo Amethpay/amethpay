@@ -40,6 +40,7 @@ class _UserProfileAvatarWidgetState extends State<UserProfileAvatarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // Usar AuthUserStreamWidget para atualizar em tempo real
     return AuthUserStreamWidget(
       builder: (context) => GestureDetector(
         onTap: widget.onTap != null
@@ -67,10 +68,12 @@ class _UserProfileAvatarWidgetState extends State<UserProfileAvatarWidget> {
     );
   }
 
+  /// Constrói a imagem de perfil com tratamento de erro
   Widget _buildProfileImage() {
+    // Obter URL da foto do usuário atual
     final String? photoUrl = currentUserPhoto;
 
-    // Se não houver URL de foto, mostrar ícone padrão
+    // Se não houver URL, mostrar ícone padrão
     if (photoUrl == null || photoUrl.isEmpty) {
       return Container(
         width: widget.size,
@@ -87,14 +90,16 @@ class _UserProfileAvatarWidgetState extends State<UserProfileAvatarWidget> {
       );
     }
 
-    // Se houver URL, carregar com cache
+    // Carregar imagem com cache
     return CachedNetworkImage(
       imageUrl: photoUrl,
       fit: BoxFit.cover,
-      fadeInDuration: Duration(milliseconds: 500),
-      fadeOutDuration: Duration(milliseconds: 500),
+      fadeInDuration: const Duration(milliseconds: 500),
+      fadeOutDuration: const Duration(milliseconds: 500),
+      // Cache de memória para melhor performance
       memCacheHeight: (widget.size! * 2).toInt(),
       memCacheWidth: (widget.size! * 2).toInt(),
+      // Indicador de carregamento
       progressIndicatorBuilder: (context, url, downloadProgress) {
         return Container(
           width: widget.size,
@@ -118,6 +123,7 @@ class _UserProfileAvatarWidgetState extends State<UserProfileAvatarWidget> {
           ),
         );
       },
+      // Widget de erro
       errorWidget: (context, url, error) {
         return Container(
           width: widget.size,
@@ -134,12 +140,12 @@ class _UserProfileAvatarWidgetState extends State<UserProfileAvatarWidget> {
                 color: Colors.white,
                 size: widget.size! * 0.5,
               ),
-              SizedBox(height: 4.0),
+              SizedBox(height: widget.size! * 0.1),
               Text(
                 'Erro',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 10.0,
+                  fontSize: widget.size! * 0.15,
                 ),
               ),
             ],
