@@ -103,3 +103,7 @@ export '/personal/login_page_copy/login_page_copy_widget.dart'
     show LoginPageCopyWidget;
 export '/components/homescreen_business1/homescreen_business1_widget.dart'
     show HomescreenBusiness1Widget;
+export '/components/user_profile_avatar/user_profile_avatar_widget.dart'
+    show UserProfileAvatarWidget;
+export '/components/change_photo_button/change_photo_button_widget.dart'
+    show ChangePhotoButtonWidget;
