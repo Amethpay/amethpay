@@ -345,39 +345,10 @@ class _ExchangeWidgetState extends State<ExchangeWidget>
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Container(
-                                    width: 70.0,
-                                    height: 70.0,
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFF262D34),
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: Color(0xFFA74DC9),
-                                      ),
+                                  UserProfileAvatarWidget(
+                                      size: 80.0,
+                                      borderWidth: 3.0,
                                     ),
-                                    child: Align(
-                                      alignment: AlignmentDirectional(0.0, 0.0),
-                                      child: Padding(
-                                        padding: EdgeInsets.all(2.0),
-                                        child: AuthUserStreamWidget(
-                                          builder: (context) => Container(
-                                            width: 90.0,
-                                            height: 90.0,
-                                            clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: CachedNetworkImage(
-                                              fadeInDuration:
-                                                  Duration(milliseconds: 500),
-                                              fadeOutDuration:
-                                                  Duration(milliseconds: 500),
-                                              imageUrl: valueOrDefault<String>(
-                                                currentUserPhoto,
-                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amethyst-i05act/assets/e6tgstbxarbm/WhatsApp_Image_2024-07-09_at_22.59.21.jpeg',
-                                              ),
-                                              fit: BoxFit.fitWidth,
-                                            ),
                                           ),
                                         ),
                                       ),
@@ -1844,39 +1815,10 @@ class _ExchangeWidgetState extends State<ExchangeWidget>
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Container(
-                                    width: 80.0,
-                                    height: 80.0,
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFF262D34),
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: Color(0xFFA74DC9),
-                                      ),
+                                  UserProfileAvatarWidget(
+                                      size: 80.0,
+                                      borderWidth: 3.0,
                                     ),
-                                    child: Align(
-                                      alignment: AlignmentDirectional(0.0, 0.0),
-                                      child: Padding(
-                                        padding: EdgeInsets.all(2.0),
-                                        child: AuthUserStreamWidget(
-                                          builder: (context) => Container(
-                                            width: 90.0,
-                                            height: 90.0,
-                                            clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: CachedNetworkImage(
-                                              fadeInDuration:
-                                                  Duration(milliseconds: 500),
-                                              fadeOutDuration:
-                                                  Duration(milliseconds: 500),
-                                              imageUrl: valueOrDefault<String>(
-                                                currentUserPhoto,
-                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amethyst-i05act/assets/e6tgstbxarbm/WhatsApp_Image_2024-07-09_at_22.59.21.jpeg',
-                                              ),
-                                              fit: BoxFit.fitWidth,
-                                            ),
                                           ),
                                         ),
                                       ),

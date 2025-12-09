@@ -76,14 +76,16 @@ class _HomescreenWidgetState extends State<HomescreenWidget> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          decoration: BoxDecoration(),
-                        ),
+                        UserProfileAvatarWidget(
+                          size: 80.0,
+                          borderWidth: 3.0,
+                        )
                         DragTarget<String>(
                           builder: (context, _, __) {
-                            return Container(
-                              decoration: BoxDecoration(),
-                            );
+                            UserProfileAvatarWidget(
+                              size: 80.0,
+                              borderWidth: 3.0,
+                            )
                           },
                         ),
                         Padding(
@@ -99,46 +101,10 @@ class _HomescreenWidgetState extends State<HomescreenWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      width: 80.0,
-                                      height: 80.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          width: 3.0,
-                                        ),
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(40.0),
-                                        child: Image.network(
-                                          currentUserPhoto,
-                                          fit: BoxFit.cover,
-                                          errorBuilder: (context, error,
-                                              stackTrace) {
-                                            return Container(
-                                              width: 80.0,
-                                              height: 80.0,
-                                              decoration: BoxDecoration(
-                                                color: FlutterFlowTheme.of(
-                                                        context)
-                                                    .primaryColor,
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: Icon(
-                                                Icons.person,
-                                                color: Colors.white,
-                                                size: 40.0,
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ),
+                                    UserProfileAvatarWidget(
+                                      size: 80.0,
+                                      borderWidth: 3.0,
+                                    )
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           12.0, 0.0, 0.0, 0.0),
@@ -456,14 +422,16 @@ class _HomescreenWidgetState extends State<HomescreenWidget> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          decoration: BoxDecoration(),
-                        ),
+                        UserProfileAvatarWidget(
+                          size: 80.0,
+                          borderWidth: 3.0,
+                        )
                         DragTarget<String>(
                           builder: (context, _, __) {
-                            return Container(
-                              decoration: BoxDecoration(),
-                            );
+                            UserProfileAvatarWidget(
+                              size: 80.0,
+                              borderWidth: 3.0,
+                            )
                           },
                         ),
                         Padding(
@@ -479,46 +447,10 @@ class _HomescreenWidgetState extends State<HomescreenWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      width: 80.0,
-                                      height: 80.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          width: 3.0,
-                                        ),
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(40.0),
-                                        child: Image.network(
-                                          currentUserPhoto,
-                                          fit: BoxFit.cover,
-                                          errorBuilder: (context, error,
-                                              stackTrace) {
-                                            return Container(
-                                              width: 80.0,
-                                              height: 80.0,
-                                              decoration: BoxDecoration(
-                                                color: FlutterFlowTheme.of(
-                                                        context)
-                                                    .primaryColor,
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: Icon(
-                                                Icons.person,
-                                                color: Colors.white,
-                                                size: 40.0,
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ),
+                                    UserProfileAvatarWidget(
+                                      size: 80.0,
+                                      borderWidth: 3.0,
+                                    )
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           12.0, 0.0, 0.0, 0.0),

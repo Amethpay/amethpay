@@ -1253,31 +1253,10 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                                                                   }
                                                                 }
                                                               },
-                                                              child: Container(
-                                                                width: 100.0,
-                                                                height: 100.0,
-                                                                clipBehavior: Clip
-                                                                    .antiAlias,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  shape: BoxShape
-                                                                      .circle,
-                                                                ),
-                                                                child: Image
-                                                                    .network(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    currentUserPhoto,
-                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/amethyst-i05act/assets/1wywv4yl7r1i/Sem_nome_%5BTamanho_original%5D_(1).png',
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ).animateOnPageLoad(
-                                                                    animationsMap[
-                                                                        'circleImageOnPageLoadAnimation1']!),
-                                                          ),
-                                                        ),
-                                                      ),
+                                                              child: UserProfileAvatarWidget(
+                                      size: 80.0,
+                                      borderWidth: 3.0,
+                                    ),
                                                     ),
                                                   ),
                                                   Text(
