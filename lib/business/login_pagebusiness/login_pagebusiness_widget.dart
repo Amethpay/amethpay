@@ -469,12 +469,12 @@ class _LoginPagebusinessWidgetState extends State<LoginPagebusinessWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   20.0, 24.0, 20.0, 24.0),
                                           suffixIcon: InkWell(
-                                            onTap: () => safeSetState(
-                                              () => _model
+                                            onTap: () async {
+                                              safeSetState(() => _model
                                                       .passwordLoginVisibility1 =
                                                   !_model
-                                                      .passwordLoginVisibility1,
-                                            ),
+                                                      .passwordLoginVisibility1);
+                                            },
                                             focusNode:
                                                 FocusNode(skipTraversal: true),
                                             child: Icon(
@@ -1196,12 +1196,12 @@ class _LoginPagebusinessWidgetState extends State<LoginPagebusinessWidget> {
                                             EdgeInsetsDirectional.fromSTEB(
                                                 20.0, 24.0, 20.0, 24.0),
                                         suffixIcon: InkWell(
-                                          onTap: () => safeSetState(
-                                            () => _model
+                                          onTap: () async {
+                                            safeSetState(() => _model
                                                     .passwordLoginVisibility2 =
                                                 !_model
-                                                    .passwordLoginVisibility2,
-                                          ),
+                                                    .passwordLoginVisibility2);
+                                          },
                                           focusNode:
                                               FocusNode(skipTraversal: true),
                                           child: Icon(

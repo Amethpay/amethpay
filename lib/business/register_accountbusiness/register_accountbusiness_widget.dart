@@ -474,12 +474,12 @@ class _RegisterAccountbusinessWidgetState
                                               EdgeInsetsDirectional.fromSTEB(
                                                   20.0, 24.0, 20.0, 24.0),
                                           suffixIcon: InkWell(
-                                            onTap: () => safeSetState(
-                                              () => _model
+                                            onTap: () async {
+                                              safeSetState(() => _model
                                                       .passwordCreateVisibility1 =
                                                   !_model
-                                                      .passwordCreateVisibility1,
-                                            ),
+                                                      .passwordCreateVisibility1);
+                                            },
                                             focusNode:
                                                 FocusNode(skipTraversal: true),
                                             child: Icon(
@@ -633,12 +633,12 @@ class _RegisterAccountbusinessWidgetState
                                               EdgeInsetsDirectional.fromSTEB(
                                                   20.0, 24.0, 20.0, 24.0),
                                           suffixIcon: InkWell(
-                                            onTap: () => safeSetState(
-                                              () => _model
+                                            onTap: () async {
+                                              safeSetState(() => _model
                                                       .passwordConfirmVisibility1 =
                                                   !_model
-                                                      .passwordConfirmVisibility1,
-                                            ),
+                                                      .passwordConfirmVisibility1);
+                                            },
                                             focusNode:
                                                 FocusNode(skipTraversal: true),
                                             child: Icon(
@@ -849,7 +849,7 @@ class _RegisterAccountbusinessWidgetState
                                                   LoginPagebusinessWidget
                                                       .routeName,
                                                   extra: <String, dynamic>{
-                                                    kTransitionInfoKey:
+                                                    '__transition_info__':
                                                         TransitionInfo(
                                                       hasTransition: true,
                                                       transitionType:
@@ -1411,12 +1411,12 @@ class _RegisterAccountbusinessWidgetState
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     20.0, 24.0, 20.0, 24.0),
                                             suffixIcon: InkWell(
-                                              onTap: () => safeSetState(
-                                                () => _model
+                                              onTap: () async {
+                                                safeSetState(() => _model
                                                         .passwordCreateVisibility2 =
                                                     !_model
-                                                        .passwordCreateVisibility2,
-                                              ),
+                                                        .passwordCreateVisibility2);
+                                              },
                                               focusNode: FocusNode(
                                                   skipTraversal: true),
                                               child: Icon(
@@ -1581,12 +1581,12 @@ class _RegisterAccountbusinessWidgetState
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     20.0, 24.0, 20.0, 24.0),
                                             suffixIcon: InkWell(
-                                              onTap: () => safeSetState(
-                                                () => _model
+                                              onTap: () async {
+                                                safeSetState(() => _model
                                                         .passwordConfirmVisibility2 =
                                                     !_model
-                                                        .passwordConfirmVisibility2,
-                                              ),
+                                                        .passwordConfirmVisibility2);
+                                              },
                                               focusNode: FocusNode(
                                                   skipTraversal: true),
                                               child: Icon(
@@ -1819,7 +1819,7 @@ class _RegisterAccountbusinessWidgetState
                                                             .routeName,
                                                         extra: <String,
                                                             dynamic>{
-                                                          kTransitionInfoKey:
+                                                          '__transition_info__':
                                                               TransitionInfo(
                                                             hasTransition: true,
                                                             transitionType:

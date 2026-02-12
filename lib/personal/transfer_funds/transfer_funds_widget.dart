@@ -3105,7 +3105,7 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
                                       context.pushNamed(
                                         CryptoWalletBalanceWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -3319,7 +3319,7 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
                                       context.pushNamed(
                                         ProfileWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -6186,7 +6186,7 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
                                       context.pushNamed(
                                         CryptoWalletBalanceWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -6400,7 +6400,7 @@ class _TransferFundsWidgetState extends State<TransferFundsWidget>
                                       context.pushNamed(
                                         ProfileWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,

@@ -2077,7 +2077,7 @@ class _SuportbusinessWidgetState extends State<SuportbusinessWidget>
                                       context.pushNamed(
                                         TransferFundsBusinessWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -2292,7 +2292,7 @@ class _SuportbusinessWidgetState extends State<SuportbusinessWidget>
                                         CryptoWalletBalanceBusinessWidget
                                             .routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -4146,7 +4146,7 @@ class _SuportbusinessWidgetState extends State<SuportbusinessWidget>
                                       context.pushNamed(
                                         TransferFundsBusinessWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -4362,7 +4362,7 @@ class _SuportbusinessWidgetState extends State<SuportbusinessWidget>
                                         CryptoWalletBalanceBusinessWidget
                                             .routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,

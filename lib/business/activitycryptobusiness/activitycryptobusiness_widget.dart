@@ -1643,7 +1643,7 @@ class _ActivitycryptobusinessWidgetState
                                       context.pushNamed(
                                         TransferFundsBusinessWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -1858,7 +1858,7 @@ class _ActivitycryptobusinessWidgetState
                                         CryptoWalletBalanceBusinessWidget
                                             .routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -2073,7 +2073,7 @@ class _ActivitycryptobusinessWidgetState
                                       context.pushNamed(
                                         ProfilebusinessWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -3853,7 +3853,7 @@ class _ActivitycryptobusinessWidgetState
                                       context.pushNamed(
                                         TransferFundsBusinessWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -4069,7 +4069,7 @@ class _ActivitycryptobusinessWidgetState
                                         CryptoWalletBalanceBusinessWidget
                                             .routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -4284,7 +4284,7 @@ class _ActivitycryptobusinessWidgetState
                                       context.pushNamed(
                                         ProfilebusinessWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,

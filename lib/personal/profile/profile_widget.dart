@@ -1325,7 +1325,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       context.pushNamed(
                                         TransferFundsWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -1539,7 +1539,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       context.pushNamed(
                                         CryptoWalletBalanceWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -3184,7 +3184,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       context.pushNamed(
                                         TransferFundsWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -3399,7 +3399,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       context.pushNamed(
                                         CryptoWalletBalanceWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,

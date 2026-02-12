@@ -3136,7 +3136,7 @@ class _TransferFundsBusinessWidgetState
                                         CryptoWalletBalanceBusinessWidget
                                             .routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -3351,7 +3351,7 @@ class _TransferFundsBusinessWidgetState
                                       context.pushNamed(
                                         ProfilebusinessWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -6248,7 +6248,7 @@ class _TransferFundsBusinessWidgetState
                                         CryptoWalletBalanceBusinessWidget
                                             .routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -6463,7 +6463,7 @@ class _TransferFundsBusinessWidgetState
                                       context.pushNamed(
                                         ProfilebusinessWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,

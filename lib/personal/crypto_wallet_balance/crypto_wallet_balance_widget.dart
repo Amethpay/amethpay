@@ -622,7 +622,7 @@ class _CryptoWalletBalanceWidgetState extends State<CryptoWalletBalanceWidget>
                                                                 .routeName,
                                                             extra: <String,
                                                                 dynamic>{
-                                                              kTransitionInfoKey:
+                                                              '__transition_info__':
                                                                   TransitionInfo(
                                                                 hasTransition:
                                                                     true,
@@ -2071,7 +2071,7 @@ class _CryptoWalletBalanceWidgetState extends State<CryptoWalletBalanceWidget>
                                       context.pushNamed(
                                         TransferFundsWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -2476,7 +2476,7 @@ class _CryptoWalletBalanceWidgetState extends State<CryptoWalletBalanceWidget>
                                       context.pushNamed(
                                         ProfileWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -3009,7 +3009,7 @@ class _CryptoWalletBalanceWidgetState extends State<CryptoWalletBalanceWidget>
                                                                   .routeName,
                                                               extra: <String,
                                                                   dynamic>{
-                                                                kTransitionInfoKey:
+                                                                '__transition_info__':
                                                                     TransitionInfo(
                                                                   hasTransition:
                                                                       true,
@@ -4450,7 +4450,7 @@ class _CryptoWalletBalanceWidgetState extends State<CryptoWalletBalanceWidget>
                                       context.pushNamed(
                                         TransferFundsWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,
@@ -4856,7 +4856,7 @@ class _CryptoWalletBalanceWidgetState extends State<CryptoWalletBalanceWidget>
                                       context.pushNamed(
                                         ProfileWidget.routeName,
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          '__transition_info__': TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.bottomToTop,

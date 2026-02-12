@@ -2470,7 +2470,7 @@ class _UserdataWidgetState extends State<UserdataWidget> {
                                           context.pushNamed(
                                             TransferFundsWidget.routeName,
                                             extra: <String, dynamic>{
-                                              kTransitionInfoKey:
+                                              '__transition_info__':
                                                   TransitionInfo(
                                                 hasTransition: true,
                                                 transitionType:
@@ -2690,7 +2690,7 @@ class _UserdataWidgetState extends State<UserdataWidget> {
                                           context.pushNamed(
                                             CryptoWalletBalanceWidget.routeName,
                                             extra: <String, dynamic>{
-                                              kTransitionInfoKey:
+                                              '__transition_info__':
                                                   TransitionInfo(
                                                 hasTransition: true,
                                                 transitionType:
@@ -5178,7 +5178,7 @@ class _UserdataWidgetState extends State<UserdataWidget> {
                                           context.pushNamed(
                                             TransferFundsWidget.routeName,
                                             extra: <String, dynamic>{
-                                              kTransitionInfoKey:
+                                              '__transition_info__':
                                                   TransitionInfo(
                                                 hasTransition: true,
                                                 transitionType:
@@ -5399,7 +5399,7 @@ class _UserdataWidgetState extends State<UserdataWidget> {
                                           context.pushNamed(
                                             CryptoWalletBalanceWidget.routeName,
                                             extra: <String, dynamic>{
-                                              kTransitionInfoKey:
+                                              '__transition_info__':
                                                   TransitionInfo(
                                                 hasTransition: true,
                                                 transitionType:

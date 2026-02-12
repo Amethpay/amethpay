@@ -1434,7 +1434,7 @@ class _ProfilebusinessWidgetState extends State<ProfilebusinessWidget> {
                                                   TransferFundsBusinessWidget
                                                       .routeName,
                                                   extra: <String, dynamic>{
-                                                    kTransitionInfoKey:
+                                                    '__transition_info__':
                                                         TransitionInfo(
                                                       hasTransition: true,
                                                       transitionType:
@@ -1701,7 +1701,7 @@ class _ProfilebusinessWidgetState extends State<ProfilebusinessWidget> {
                                                   CryptoWalletBalanceBusinessWidget
                                                       .routeName,
                                                   extra: <String, dynamic>{
-                                                    kTransitionInfoKey:
+                                                    '__transition_info__':
                                                         TransitionInfo(
                                                       hasTransition: true,
                                                       transitionType:
@@ -3519,7 +3519,7 @@ class _ProfilebusinessWidgetState extends State<ProfilebusinessWidget> {
                                                 TransferFundsBusinessWidget
                                                     .routeName,
                                                 extra: <String, dynamic>{
-                                                  kTransitionInfoKey:
+                                                  '__transition_info__':
                                                       TransitionInfo(
                                                     hasTransition: true,
                                                     transitionType:
@@ -3775,7 +3775,7 @@ class _ProfilebusinessWidgetState extends State<ProfilebusinessWidget> {
                                                 CryptoWalletBalanceBusinessWidget
                                                     .routeName,
                                                 extra: <String, dynamic>{
-                                                  kTransitionInfoKey:
+                                                  '__transition_info__':
                                                       TransitionInfo(
                                                     hasTransition: true,
                                                     transitionType:
