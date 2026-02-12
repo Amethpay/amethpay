@@ -25,11 +25,6 @@ class UserbusinessRecord extends FirestoreRecord {
   String get email => _email ?? '';
   bool hasEmail() => _email != null;
 
-  // "password" field.
-  String? _password;
-  String get password => _password ?? '';
-  bool hasPassword() => _password != null;
-
   // "uid" field.
   String? _uid;
   String get uid => _uid ?? '';
@@ -218,7 +213,6 @@ class UserbusinessRecord extends FirestoreRecord {
   void _initializeFields() {
     _displayName = snapshotData['display_name'] as String?;
     _email = snapshotData['email'] as String?;
-    _password = snapshotData['password'] as String?;
     _uid = snapshotData['uid'] as String?;
     _age = castToType<int>(snapshotData['age']);
     _location = snapshotData['location'] as LatLng?;
@@ -300,7 +294,6 @@ class UserbusinessRecord extends FirestoreRecord {
 Map<String, dynamic> createUserbusinessRecordData({
   String? displayName,
   String? email,
-  String? password,
   String? uid,
   int? age,
   LatLng? location,
@@ -343,7 +336,6 @@ Map<String, dynamic> createUserbusinessRecordData({
     <String, dynamic>{
       'display_name': displayName,
       'email': email,
-      'password': password,
       'uid': uid,
       'age': age,
       'location': location,
@@ -395,7 +387,6 @@ class UserbusinessRecordDocumentEquality
   bool equals(UserbusinessRecord? e1, UserbusinessRecord? e2) {
     return e1?.displayName == e2?.displayName &&
         e1?.email == e2?.email &&
-        e1?.password == e2?.password &&
         e1?.uid == e2?.uid &&
         e1?.age == e2?.age &&
         e1?.location == e2?.location &&
@@ -439,7 +430,6 @@ class UserbusinessRecordDocumentEquality
   int hash(UserbusinessRecord? e) => const ListEquality().hash([
         e?.displayName,
         e?.email,
-        e?.password,
         e?.uid,
         e?.age,
         e?.location,

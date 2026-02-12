@@ -16,12 +16,15 @@ class CreateAccessCodeCall {
     return ApiManager.instance.makeApiCall(
       callName: 'create access code',
       apiUrl: 'https://pud0ib.buildship.run/code',
-      callType: ApiCallType.GET,
-      headers: {},
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
       params: {
         'receiver': receiver,
         'code': code,
       },
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -38,14 +41,17 @@ class AccessCall {
     String? code = '',
   }) async {
     return ApiManager.instance.makeApiCall(
-      callName: 'access ',
+      callName: 'access',
       apiUrl: 'https://pud0ib.buildship.run/code1',
-      callType: ApiCallType.GET,
-      headers: {},
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
       params: {
         'receiver': receiver,
         'code': code,
       },
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

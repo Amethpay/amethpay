@@ -2,6 +2,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +33,10 @@ class AccesskeyverificationWidget extends StatefulWidget {
 class _AccesskeyverificationWidgetState
     extends State<AccesskeyverificationWidget> {
   late AccesskeyverificationModel _model;
+  int _verificationAttempts = 0;
+  DateTime? _lastAttemptTime;
+  static const int _maxAttempts = 5;
+  static const int _cooldownSeconds = 60;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -285,8 +291,43 @@ class _AccesskeyverificationWidgetState
                           EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
+                          // Rate limiting
+                          if (_lastAttemptTime != null) {
+                            final elapsed = DateTime.now().difference(_lastAttemptTime!).inSeconds;
+                            if (_verificationAttempts >= _maxAttempts && elapsed < _cooldownSeconds) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Too many attempts. Please wait ${_cooldownSeconds - elapsed} seconds.',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                              return;
+                            }
+                            if (elapsed >= _cooldownSeconds) {
+                              _verificationAttempts = 0;
+                            }
+                          }
+                          _verificationAttempts++;
+                          _lastAttemptTime = DateTime.now();
+
                           if (_model.enterTheCodeTextController1.text ==
                               FFAppState().accesskey) {
+                            // Save email verification to Firestore
+                            final user = FirebaseAuth.instance.currentUser;
+                            if (user != null) {
+                              await FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(user.uid)
+                                  .set({
+                                'emailVerified': true,
+                              }, SetOptions(merge: true));
+                            }
+                            FFAppState().emailVerified = true;
+
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
@@ -304,7 +345,7 @@ class _AccesskeyverificationWidgetState
                               CompleteProfileWidget.routeName,
                               queryParameters: {
                                 'email': serializeParam(
-                                  _model.enterTheCodeTextController1.text,
+                                  widget.email,
                                   ParamType.String,
                                 ),
                                 'password': serializeParam(
@@ -328,7 +369,7 @@ class _AccesskeyverificationWidgetState
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'The verification code entered is incorrect. Please check and try again!',
+                                  'The verification code entered is incorrect. Please check and try again! (${_maxAttempts - _verificationAttempts} attempts remaining)',
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),
@@ -608,8 +649,43 @@ class _AccesskeyverificationWidgetState
                           EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
+                          // Rate limiting
+                          if (_lastAttemptTime != null) {
+                            final elapsed = DateTime.now().difference(_lastAttemptTime!).inSeconds;
+                            if (_verificationAttempts >= _maxAttempts && elapsed < _cooldownSeconds) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Too many attempts. Please wait ${_cooldownSeconds - elapsed} seconds.',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                              return;
+                            }
+                            if (elapsed >= _cooldownSeconds) {
+                              _verificationAttempts = 0;
+                            }
+                          }
+                          _verificationAttempts++;
+                          _lastAttemptTime = DateTime.now();
+
                           if (_model.enterTheCodeTextController2.text ==
                               FFAppState().accesskey) {
+                            // Save email verification to Firestore
+                            final user = FirebaseAuth.instance.currentUser;
+                            if (user != null) {
+                              await FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(user.uid)
+                                  .set({
+                                'emailVerified': true,
+                              }, SetOptions(merge: true));
+                            }
+                            FFAppState().emailVerified = true;
+
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
@@ -627,7 +703,7 @@ class _AccesskeyverificationWidgetState
                               CompleteProfileWidget.routeName,
                               queryParameters: {
                                 'email': serializeParam(
-                                  _model.enterTheCodeTextController2.text,
+                                  widget.email,
                                   ParamType.String,
                                 ),
                                 'password': serializeParam(
@@ -651,7 +727,7 @@ class _AccesskeyverificationWidgetState
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'The verification code entered is incorrect. Please check and try again!',
+                                  'The verification code entered is incorrect. Please check and try again! (${_maxAttempts - _verificationAttempts} attempts remaining)',
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),

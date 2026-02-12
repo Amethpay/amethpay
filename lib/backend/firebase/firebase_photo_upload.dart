@@ -4,8 +4,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/backend/backend.dart';
+import '../../app_state.dart';
 
-/// Função para fazer upload de foto de perfil com sincronização completa
+/// Upload de foto de perfil com sincronizacao completa
 /// Atualiza Firebase Auth, Firestore e FFAppState
 Future<String?> uploadProfilePhoto({
   required File imageFile,
@@ -15,13 +16,12 @@ Future<String?> uploadProfilePhoto({
   try {
     // Validar arquivo
     if (!await imageFile.exists()) {
-      throw Exception('Arquivo não existe');
+      throw Exception('Arquivo nao existe');
     }
 
     final fileSize = await imageFile.length();
     if (fileSize > 10 * 1024 * 1024) {
-      // Máximo 10MB
-      throw Exception('Arquivo muito grande (máximo 10MB)');
+      throw Exception('Arquivo muito grande (maximo 10MB)');
     }
 
     // Caminho no Firebase Storage
@@ -49,7 +49,7 @@ Future<String?> uploadProfilePhoto({
       onProgress(progress);
     });
 
-    // Aguardar conclusão
+    // Aguardar conclusao
     await uploadTask;
 
     // Obter URL de download
@@ -61,59 +61,56 @@ Future<String?> uploadProfilePhoto({
       try {
         await currentUser.updatePhotoURL(downloadUrl);
         await currentUser.reload();
-        print('✅ Firebase Auth atualizado: $downloadUrl');
+        print('[Photo] Firebase Auth atualizado: $downloadUrl');
       } catch (e) {
-        print('⚠️ Erro ao atualizar Firebase Auth: $e');
+        print('[Photo] Erro ao atualizar Firebase Auth: $e');
       }
     }
 
-    // 2. Atualizar Firestore com múltiplas tentativas
+    // 2. Atualizar Firestore (somente campo padrao photo_url)
     try {
       await FirebaseFirestore.instance
           .collection('users')
           .doc(userId)
           .update({
-        'photoUrl': downloadUrl,
-        'photo_url': downloadUrl, // Ambos os nomes para compatibilidade
-        'photoURL': downloadUrl, // Terceira variação
+        'photo_url': downloadUrl,
         'photoUpdatedAt': FieldValue.serverTimestamp(),
       });
-      print('✅ Firestore atualizado: $downloadUrl');
+      print('[Photo] Firestore atualizado: $downloadUrl');
     } catch (e) {
-      print('⚠️ Erro ao atualizar Firestore: $e');
-      // Tentar set em vez de update se documento não existe
+      print('[Photo] Erro ao atualizar Firestore (update): $e');
+      // Tentar set em vez de update se documento nao existe
       try {
         await FirebaseFirestore.instance
             .collection('users')
             .doc(userId)
             .set({
-          'photoUrl': downloadUrl,
           'photo_url': downloadUrl,
-          'photoURL': downloadUrl,
           'photoUpdatedAt': FieldValue.serverTimestamp(),
         }, SetOptions(merge: true));
-        print('✅ Firestore atualizado com set: $downloadUrl');
+        print('[Photo] Firestore atualizado com set/merge: $downloadUrl');
       } catch (e2) {
-        print('❌ Erro ao atualizar Firestore com set: $e2');
+        print('[Photo] Erro critico ao atualizar Firestore: $e2');
+        rethrow;
       }
     }
 
     // 3. Atualizar FFAppState
     try {
       await FFAppState().setCurrentUserPhoto(downloadUrl);
-      print('✅ FFAppState atualizado: $downloadUrl');
+      print('[Photo] FFAppState atualizado: $downloadUrl');
     } catch (e) {
-      print('⚠️ Erro ao atualizar FFAppState: $e');
+      print('[Photo] Erro ao atualizar FFAppState: $e');
     }
 
-    // 4. Forçar refresh do usuário atual
+    // 4. Forcar refresh do usuario atual
     try {
       if (currentUser != null) {
         await currentUser.reload();
-        print('✅ Usuário recarregado');
+        print('[Photo] Usuario recarregado');
       }
     } catch (e) {
-      print('⚠️ Erro ao recarregar usuário: $e');
+      print('[Photo] Erro ao recarregar usuario: $e');
     }
 
     return downloadUrl;
@@ -124,12 +121,11 @@ Future<String?> uploadProfilePhoto({
   }
 }
 
-/// Função para deletar foto de perfil antiga
+/// Deletar foto de perfil antiga do Storage
 Future<void> deleteOldProfilePhoto(String? photoUrl) async {
   if (photoUrl == null || photoUrl.isEmpty) return;
 
   try {
-    // Extrair o caminho do arquivo da URL
     if (photoUrl.contains('profile_pictures/')) {
       final startIndex = photoUrl.indexOf('profile_pictures/');
       final endIndex = photoUrl.indexOf('?');
@@ -141,12 +137,11 @@ Future<void> deleteOldProfilePhoto(String? photoUrl) async {
       await ref.delete();
     }
   } catch (e) {
-    // Silenciosamente ignorar erros ao deletar arquivo antigo
-    print('Erro ao deletar foto antiga: $e');
+    print('[Photo] Erro ao deletar foto antiga: $e');
   }
 }
 
-/// Função para obter foto do usuário atual
+/// Obter foto do usuario atual do Firebase Auth
 Future<String?> getCurrentUserPhotoUrl() async {
   try {
     final User? currentUser = FirebaseAuth.instance.currentUser;
@@ -156,12 +151,12 @@ Future<String?> getCurrentUserPhotoUrl() async {
     }
     return null;
   } catch (e) {
-    print('Erro ao obter foto do usuário: $e');
+    print('[Photo] Erro ao obter foto do usuario: $e');
     return null;
   }
 }
 
-/// Função para sincronizar foto com Firestore
+/// Sincronizar foto do Firebase Auth com Firestore (somente photo_url)
 Future<void> syncPhotoWithFirestore(String userId) async {
   try {
     final User? currentUser = FirebaseAuth.instance.currentUser;
@@ -170,11 +165,10 @@ Future<void> syncPhotoWithFirestore(String userId) async {
           .collection('users')
           .doc(userId)
           .update({
-        'photoUrl': currentUser.photoURL,
         'photo_url': currentUser.photoURL,
       });
     }
   } catch (e) {
-    print('Erro ao sincronizar foto: $e');
+    print('[Photo] Erro ao sincronizar foto: $e');
   }
 }

@@ -1,6 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'pause_card_model.dart';
@@ -15,6 +17,7 @@ class PauseCardWidget extends StatefulWidget {
 
 class _PauseCardWidgetState extends State<PauseCardWidget> {
   late PauseCardModel _model;
+  bool _isLoading = false;
 
   @override
   void setState(VoidCallback callback) {
@@ -35,6 +38,52 @@ class _PauseCardWidgetState extends State<PauseCardWidget> {
     _model.maybeDispose();
 
     super.dispose();
+  }
+
+  Future<void> _pauseCard() async {
+    setState(() => _isLoading = true);
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .update({
+          'cardStatus': 'paused',
+        });
+
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Card paused successfully!',
+                style: TextStyle(color: Colors.white),
+              ),
+              duration: Duration(milliseconds: 3000),
+              backgroundColor: Color(0xFF8E0BBE),
+            ),
+          );
+          context.pop();
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Error pausing card. Please try again.',
+              style: TextStyle(color: Colors.white),
+            ),
+            duration: Duration(milliseconds: 3000),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
   }
 
   @override
@@ -156,12 +205,14 @@ class _PauseCardWidgetState extends State<PauseCardWidget> {
                     ),
                   ),
                   FFButtonWidget(
-                    onPressed: () async {
-                      context.pop();
+                    onPressed: _isLoading ? null : () async {
+                      await _pauseCard();
                     },
-                    text: FFLocalizations.of(context).getText(
-                      'hw07mkb9' /* Yes, Pause */,
-                    ),
+                    text: _isLoading
+                        ? 'Pausing...'
+                        : FFLocalizations.of(context).getText(
+                            'hw07mkb9' /* Yes, Pause */,
+                          ),
                     options: FFButtonOptions(
                       width: 150.0,
                       height: 50.0,

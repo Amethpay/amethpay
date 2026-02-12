@@ -25,11 +25,6 @@ class UsersRecord extends FirestoreRecord {
   String get email => _email ?? '';
   bool hasEmail() => _email != null;
 
-  // "password" field.
-  String? _password;
-  String get password => _password ?? '';
-  bool hasPassword() => _password != null;
-
   // "uid" field.
   String? _uid;
   String get uid => _uid ?? '';
@@ -280,10 +275,24 @@ class UsersRecord extends FirestoreRecord {
   String get copyofpassportbusiness => _copyofpassportbusiness ?? '';
   bool hasCopyofpassportbusiness() => _copyofpassportbusiness != null;
 
+  // "emailVerified" field.
+  bool? _emailVerified;
+  bool get emailVerified => _emailVerified ?? false;
+  bool hasEmailVerified() => _emailVerified != null;
+
+  // "cardStatus" field. Values: '', 'requested', 'active', 'paused', 'cancelled'
+  String? _cardStatus;
+  String get cardStatus => _cardStatus ?? '';
+  bool hasCardStatus() => _cardStatus != null;
+
+  // "cardRequestedAt" field.
+  DateTime? _cardRequestedAt;
+  DateTime? get cardRequestedAt => _cardRequestedAt;
+  bool hasCardRequestedAt() => _cardRequestedAt != null;
+
   void _initializeFields() {
     _displayName = snapshotData['display_name'] as String?;
     _email = snapshotData['email'] as String?;
-    _password = snapshotData['password'] as String?;
     _uid = snapshotData['uid'] as String?;
     _age = castToType<int>(snapshotData['age']);
     _location = snapshotData['location'] as LatLng?;
@@ -339,6 +348,9 @@ class UsersRecord extends FirestoreRecord {
     _homeEuro = castToType<double>(snapshotData['HomeEuro']);
     _homeDollar = castToType<double>(snapshotData['HomeDollar']);
     _copyofpassportbusiness = snapshotData['copyofpassportbusiness'] as String?;
+    _emailVerified = snapshotData['emailVerified'] as bool?;
+    _cardStatus = snapshotData['cardStatus'] as String?;
+    _cardRequestedAt = snapshotData['cardRequestedAt'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -377,7 +389,6 @@ class UsersRecord extends FirestoreRecord {
 Map<String, dynamic> createUsersRecordData({
   String? displayName,
   String? email,
-  String? password,
   String? uid,
   int? age,
   LatLng? location,
@@ -428,12 +439,14 @@ Map<String, dynamic> createUsersRecordData({
   double? homeEuro,
   double? homeDollar,
   String? copyofpassportbusiness,
+  bool? emailVerified,
+  String? cardStatus,
+  DateTime? cardRequestedAt,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'display_name': displayName,
       'email': email,
-      'password': password,
       'uid': uid,
       'age': age,
       'location': location,
@@ -484,6 +497,9 @@ Map<String, dynamic> createUsersRecordData({
       'HomeEuro': homeEuro,
       'HomeDollar': homeDollar,
       'copyofpassportbusiness': copyofpassportbusiness,
+      'emailVerified': emailVerified,
+      'cardStatus': cardStatus,
+      'cardRequestedAt': cardRequestedAt,
     }.withoutNulls,
   );
 
@@ -497,7 +513,6 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
   bool equals(UsersRecord? e1, UsersRecord? e2) {
     return e1?.displayName == e2?.displayName &&
         e1?.email == e2?.email &&
-        e1?.password == e2?.password &&
         e1?.uid == e2?.uid &&
         e1?.age == e2?.age &&
         e1?.location == e2?.location &&
@@ -547,14 +562,16 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.homeZloty == e2?.homeZloty &&
         e1?.homeEuro == e2?.homeEuro &&
         e1?.homeDollar == e2?.homeDollar &&
-        e1?.copyofpassportbusiness == e2?.copyofpassportbusiness;
+        e1?.copyofpassportbusiness == e2?.copyofpassportbusiness &&
+        e1?.emailVerified == e2?.emailVerified &&
+        e1?.cardStatus == e2?.cardStatus &&
+        e1?.cardRequestedAt == e2?.cardRequestedAt;
   }
 
   @override
   int hash(UsersRecord? e) => const ListEquality().hash([
         e?.displayName,
         e?.email,
-        e?.password,
         e?.uid,
         e?.age,
         e?.location,
@@ -604,7 +621,10 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.homeZloty,
         e?.homeEuro,
         e?.homeDollar,
-        e?.copyofpassportbusiness
+        e?.copyofpassportbusiness,
+        e?.emailVerified,
+        e?.cardStatus,
+        e?.cardRequestedAt,
       ]);
 
   @override

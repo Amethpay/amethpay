@@ -3,6 +3,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'requestcardexit_model.dart';
@@ -29,7 +31,11 @@ class _RequestcardexitWidgetState extends State<RequestcardexitWidget> {
     super.initState();
     _model = createModel(context, () => RequestcardexitModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
+    // Submit card request to Firestore
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _submitCardRequest();
+      safeSetState(() {});
+    });
   }
 
   @override
@@ -37,6 +43,24 @@ class _RequestcardexitWidgetState extends State<RequestcardexitWidget> {
     _model.maybeDispose();
 
     super.dispose();
+  }
+
+  Future<void> _submitCardRequest() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .update({
+          'cardStatus': 'requested',
+          'cardRequestedAt': FieldValue.serverTimestamp(),
+        });
+        print('[Card] Card request submitted for user: ${user.uid}');
+      }
+    } catch (e) {
+      print('[Card] Error submitting card request: $e');
+    }
   }
 
   @override

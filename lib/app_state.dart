@@ -19,6 +19,16 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _flagtru = prefs.getString('ff_flagtru') ?? _flagtru;
     });
+    _safeInit(() {
+      _currentUserPhoto =
+          prefs.getString('ff_currentUserPhoto') ?? _currentUserPhoto;
+    });
+    _safeInit(() {
+      _cardStatus = prefs.getString('ff_cardStatus') ?? _cardStatus;
+    });
+    _safeInit(() {
+      _emailVerified = prefs.getBool('ff_emailVerified') ?? _emailVerified;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -51,6 +61,39 @@ class FFAppState extends ChangeNotifier {
   set flagtru(String value) {
     _flagtru = value;
     prefs.setString('ff_flagtru', value);
+  }
+
+  // Current user photo URL (persisted)
+  String _currentUserPhoto = '';
+  String get currentUserPhoto => _currentUserPhoto;
+  set currentUserPhoto(String value) {
+    _currentUserPhoto = value;
+    prefs.setString('ff_currentUserPhoto', value);
+    notifyListeners();
+  }
+
+  Future<void> setCurrentUserPhoto(String url) async {
+    _currentUserPhoto = url;
+    prefs.setString('ff_currentUserPhoto', url);
+    notifyListeners();
+  }
+
+  // Card status for current user (persisted)
+  String _cardStatus = '';
+  String get cardStatus => _cardStatus;
+  set cardStatus(String value) {
+    _cardStatus = value;
+    prefs.setString('ff_cardStatus', value);
+    notifyListeners();
+  }
+
+  // Email verification status (persisted)
+  bool _emailVerified = false;
+  bool get emailVerified => _emailVerified;
+  set emailVerified(bool value) {
+    _emailVerified = value;
+    prefs.setBool('ff_emailVerified', value);
+    notifyListeners();
   }
 }
 
