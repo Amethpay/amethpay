@@ -10,6 +10,8 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/upload_data.dart';
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -551,6 +553,37 @@ class _SupportbusinessWidgetState extends State<SupportbusinessWidget>
     _model.dispose();
 
     super.dispose();
+  }
+
+  Future<void> _submitSupportTicket({
+    required String companyName,
+    required String name,
+    required String email,
+    required String phone,
+    required String description,
+    String? screenshotUrl,
+  }) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        await FirebaseFirestore.instance.collection('support_tickets').add({
+          'userId': user.uid,
+          'userRef': 'users/${user.uid}',
+          'userName': name.isNotEmpty ? name : user.displayName ?? '',
+          'userEmail': email.isNotEmpty ? email : user.email ?? '',
+          'userPhone': phone,
+          'companyName': companyName,
+          'description': description,
+          'screenshotUrl': screenshotUrl ?? '',
+          'accountType': 'business',
+          'status': 'open',
+          'createdAt': FieldValue.serverTimestamp(),
+        });
+        print('[Support] Business ticket submitted for user: ${user.uid}');
+      }
+    } catch (e) {
+      print('[Support] Error submitting business ticket: $e');
+    }
   }
 
   @override
@@ -1781,6 +1814,16 @@ class _SupportbusinessWidgetState extends State<SupportbusinessWidget>
                                               }
                                               safeSetState(() {});
                                             }
+
+                                            // Save support ticket to Firestore
+                                            await _submitSupportTicket(
+                                              companyName: _model.textController1?.text ?? '',
+                                              name: _model.textController2?.text ?? '',
+                                              email: _model.textController3?.text ?? '',
+                                              phone: _model.textController4?.text ?? '',
+                                              description: _model.textController5?.text ?? '',
+                                              screenshotUrl: _model.uploadedFileUrl_uploadDataB35,
+                                            );
 
                                             await showModalBottomSheet(
                                               isScrollControlled: true,
@@ -3821,6 +3864,15 @@ class _SupportbusinessWidgetState extends State<SupportbusinessWidget>
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            // Save support ticket to Firestore
+                                            await _submitSupportTicket(
+                                              companyName: _model.textController6?.text ?? '',
+                                              name: _model.textController7?.text ?? '',
+                                              email: _model.textController8?.text ?? '',
+                                              phone: _model.textController9?.text ?? '',
+                                              description: _model.textController10?.text ?? '',
+                                              screenshotUrl: _model.uploadedFileUrl_uploadData66r,
+                                            );
                                             await showModalBottomSheet(
                                               isScrollControlled: true,
                                               backgroundColor:

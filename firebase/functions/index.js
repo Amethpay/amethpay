@@ -1,5 +1,6 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
+const { Resend } = require("resend");
 admin.initializeApp();
 
 const kFcmTokensCollection = "fcm_tokens";
@@ -206,6 +207,105 @@ function getCharForIndex(charIdx) {
     return String.fromCharCode("a".charCodeAt(0) + charIdx - 36);
   }
 }
+// Resend email helper
+async function sendEmail({ to, subject, html }) {
+  const configDoc = await firestore.doc("config/resend").get();
+  const apiKey = configDoc.exists ? configDoc.data().api_key : null;
+  if (!apiKey) {
+    console.log("No Resend API key configured in config/resend. Skipping email.");
+    return null;
+  }
+  const fromEmail = (configDoc.data().from_email) || "AmethPay <onboarding@resend.dev>";
+  const resend = new Resend(apiKey);
+  const { data, error } = await resend.emails.send({ from: fromEmail, to, subject, html });
+  if (error) {
+    console.log(`Resend error: ${JSON.stringify(error)}`);
+    return null;
+  }
+  console.log(`Email sent: ${data.id}`);
+  return data;
+}
+
+// Trigger push notification + email when a new support ticket is created
+exports.onSupportTicketCreated = functions
+  .firestore.document("support_tickets/{ticketId}")
+  .onCreate(async (snapshot, context) => {
+    try {
+      const ticketData = snapshot.data();
+      const userName = ticketData.userName || "A customer";
+      const userEmail = ticketData.userEmail || "";
+      const description = ticketData.description || "No description";
+      const truncatedDesc = description.length > 100
+        ? description.substring(0, 100) + "..."
+        : description;
+      const ticketId = context.params.ticketId;
+
+      // Read config/support for admin refs and admin email
+      const configDoc = await firestore.doc("config/support").get();
+      if (!configDoc.exists) {
+        console.log("No config/support document found. Skipping notification.");
+        return;
+      }
+
+      const adminUserRefs = configDoc.data().admin_user_refs || "";
+      const adminEmail = configDoc.data().admin_email || "";
+
+      // 1. Push notification to admin
+      if (adminUserRefs) {
+        await firestore.collection(kPushNotificationsCollection).add({
+          notification_title: "New Support Request",
+          notification_text: `${userName}: ${truncatedDesc}`,
+          user_refs: adminUserRefs,
+          target_audience: "All",
+          initial_page_name: "suport",
+          parameter_data: "",
+          status: "started",
+          created_at: admin.firestore.FieldValue.serverTimestamp(),
+        });
+        console.log(`Push notification created for ticket: ${ticketId}`);
+      }
+
+      // 2. Email to admin
+      if (adminEmail) {
+        await sendEmail({
+          to: [adminEmail],
+          subject: `[AmethPay Support] New ticket from ${userName}`,
+          html: `
+            <h2>New Support Ticket</h2>
+            <p><strong>From:</strong> ${userName} (${userEmail})</p>
+            <p><strong>Ticket ID:</strong> ${ticketId}</p>
+            <p><strong>Description:</strong></p>
+            <p>${description}</p>
+            <hr>
+            <p style="color: #888; font-size: 12px;">This is an automated email from AmethPay Support.</p>
+          `,
+        });
+      }
+
+      // 3. Confirmation email to customer
+      if (userEmail) {
+        await sendEmail({
+          to: [userEmail],
+          subject: "We received your support request - AmethPay",
+          html: `
+            <h2>Hi ${userName},</h2>
+            <p>We received your support request and our team will get back to you shortly.</p>
+            <p><strong>Your message:</strong></p>
+            <blockquote style="border-left: 3px solid #6C63FF; padding-left: 12px; color: #555;">${truncatedDesc}</blockquote>
+            <p>Ticket reference: <strong>${ticketId}</strong></p>
+            <br>
+            <p>Thank you for using AmethPay!</p>
+            <p style="color: #888; font-size: 12px;">Please do not reply to this email.</p>
+          `,
+        });
+      }
+
+      console.log(`Support ticket fully processed: ${ticketId}`);
+    } catch (e) {
+      console.log(`Error processing support ticket: ${e}`);
+    }
+  });
+
 exports.onUserDeleted = functions.auth.user().onDelete(async (user) => {
   let firestore = admin.firestore();
   let userRef = firestore.doc("users/" + user.uid);

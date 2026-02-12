@@ -70,5 +70,19 @@ service cloud.firestore {
       allow write: if false;
       allow delete: if false;
     }
+
+    match /support_tickets/{document} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null;
+      allow write: if false;
+      allow delete: if false;
+    }
+
+    match /ff_push_notifications/{document} {
+      allow create: if request.auth != null;
+      allow read: if false;
+      allow write: if false;
+      allow delete: if false;
+    }
   }
 }

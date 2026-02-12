@@ -10,6 +10,8 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/upload_data.dart';
 import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -491,6 +493,34 @@ class _SupportWidgetState extends State<SupportWidget>
     _model.dispose();
 
     super.dispose();
+  }
+
+  Future<void> _submitSupportTicket({
+    required String name,
+    required String email,
+    required String phone,
+    required String description,
+    String? screenshotUrl,
+  }) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        await FirebaseFirestore.instance.collection('support_tickets').add({
+          'userId': user.uid,
+          'userRef': 'users/${user.uid}',
+          'userName': name.isNotEmpty ? name : user.displayName ?? '',
+          'userEmail': email.isNotEmpty ? email : user.email ?? '',
+          'userPhone': phone,
+          'description': description,
+          'screenshotUrl': screenshotUrl ?? '',
+          'status': 'open',
+          'createdAt': FieldValue.serverTimestamp(),
+        });
+        print('[Support] Ticket submitted for user: ${user.uid}');
+      }
+    } catch (e) {
+      print('[Support] Error submitting ticket: $e');
+    }
   }
 
   @override
@@ -1574,6 +1604,14 @@ class _SupportWidgetState extends State<SupportWidget>
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            // Save support ticket to Firestore
+                                            await _submitSupportTicket(
+                                              name: _model.textController1?.text ?? '',
+                                              email: _model.textController2?.text ?? '',
+                                              phone: _model.textController3?.text ?? '',
+                                              description: _model.textController4?.text ?? '',
+                                              screenshotUrl: _model.uploadedFileUrl_uploadDataN19,
+                                            );
                                             await showModalBottomSheet(
                                               isScrollControlled: true,
                                               backgroundColor:
@@ -3498,6 +3536,14 @@ class _SupportWidgetState extends State<SupportWidget>
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            // Save support ticket to Firestore
+                                            await _submitSupportTicket(
+                                              name: _model.textController5?.text ?? '',
+                                              email: _model.textController6?.text ?? '',
+                                              phone: _model.textController7?.text ?? '',
+                                              description: _model.textController8?.text ?? '',
+                                              screenshotUrl: _model.uploadedFileUrl_uploadDataYy6,
+                                            );
                                             await showModalBottomSheet(
                                               isScrollControlled: true,
                                               backgroundColor:
